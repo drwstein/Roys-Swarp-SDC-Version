@@ -2712,8 +2712,8 @@ cat >>confdefs.h <<_ACEOF
 #define VERSION "$VERSION"
 _ACEOF
 
-# Some tools Automake needs.
 
+# Some tools Automake needs.
 ACLOCAL=${ACLOCAL-"${am_missing_run}aclocal-${am__api_version}"}
 
 
