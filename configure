@@ -2700,7 +2700,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE='swarp'
- VERSION='2.34.0'
+ VERSION='2.34.1 cfitsio'
 
 
 cat >>confdefs.h <<_ACEOF
