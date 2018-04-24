@@ -2006,8 +2006,10 @@ int	coadd_iload(fieldstruct *field, fieldstruct *wfield,
         QFSEEK(field->cat->file,
 		field->tab->bodypos+offset*field->tab->bytepix,
 		SEEK_SET, field->filename);
-	//MW: removed the following line as it caused astrometry errors      
-        //field->tab->currentElement = (offset == 0) ? 1 : offset; // CFITSIO
+	//MW: removed the following line in coadd_load as it caused astrometry errors
+	//the line has been introduced for cfitsio compatibility
+	//probably this is a candidate as well. Just have no data to test it      
+	field->tab->currentElement = (offset == 0) ? 1 : offset; 
         }
 #ifdef USE_THREADS
       linei = lineibuf + (threadstep&1)*field->width;
@@ -2072,8 +2074,10 @@ int	coadd_iload(fieldstruct *field, fieldstruct *wfield,
           QFSEEK(wfield->cat->file,
 		wfield->tab->bodypos+offset*wfield->tab->bytepix,
 		SEEK_SET, wfield->filename);
-	  //MW: removed the following line as it caused astrometry errors
-          //wfield->tab->currentElement = (offset == 0) ? 1 : offset; // CFITSIO
+       	  //MW: removed the following line in coadd_load as it caused astrometry errors
+	  //the line has been introduced for cfitsio compatibility
+	  //probably this is a candidate as well. Just have no data to test it	
+          wfield->tab->currentElement = (offset == 0) ? 1 : offset; // CFITSIO
           }
         read_ibody(wfield->tab, linei, field->width);
         }
@@ -2222,7 +2226,9 @@ int	coadd_load(fieldstruct *field, fieldstruct *wfield,
         QFSEEK(field->cat->file,
 		field->tab->bodypos+offset*field->tab->bytepix,
 		SEEK_SET, field->filename);
-        field->tab->currentElement = (offset == 0) ? 1 : offset; // CFITSIO
+	//MW: removed the following line as it caused astrometry errors
+	//the line has been introduced for cfitsio compatibility
+        //field->tab->currentElement = (offset == 0) ? 1 : offset; 
         }
 #ifdef USE_THREADS
       line = linebuf+(threadstep&1)*field->width;
@@ -2291,7 +2297,9 @@ int	coadd_load(fieldstruct *field, fieldstruct *wfield,
           QFSEEK(wfield->cat->file,
 		wfield->tab->bodypos+offset*wfield->tab->bytepix,
 		SEEK_SET, wfield->filename);
-      	wfield->tab->currentElement = (offset == 0) ? 1 : offset; // CFITSIO
+      	  //MW: removed the following line as it caused astrometry errors
+	  //the line has been introduced for cfitsio compatibility
+          //wfield->tab->currentElement = (offset == 0) ? 1 : offset; 
           }
         read_body(wfield->tab, line, field->width);
         if ((thresh=wfield->weight_thresh)>0.0)
