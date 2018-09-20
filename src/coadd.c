@@ -168,8 +168,13 @@ static void	max_clique_recur(unsigned int *array, int nnode, int *old,
  	//printf("DEBUG CFITSIO successfully created tile-compressed output image file, %s\n", compressedFilename);
 
  	// now, change original filename to temp one (.tmp suffix)
- 	sprintf(outfield->cat->filename, "%s.tmp", outfield->cat->filename);
+	//sprintf(outfield->cat->filename, "%s.tmp", outfield->cat->filename);
 
+	//MW:store in a tempname first as otherwise sprintf generates errors
+	char tempoutput[1000];
+	sprintf(tempoutput,"%s", outfield->cat->filename);
+ 	sprintf(outfield->cat->filename, "%s.tmp", tempoutput);
+ 	
  	return 1;
  }
 
