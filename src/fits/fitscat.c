@@ -135,8 +135,10 @@ int	addhistoryto_cat(catstruct *cat, char *str)
   if (!strftime(str2, 16, "%d/%m/%Y %H:%M", localtime(&thetime)))
     error(EXIT_FAILURE, "*Internal Error*: Time/date string too long in ",
 	"addhistoryto_cat()");
-  sprintf(str2, "%s %.65s", str2, str);
-  fitsadd(tab->headbuf, "HISTORY ", str2);
+	char tempoutput[1000];
+	sprintf(tempoutput,"%s", str2);
+    sprintf(str2, "%s %.65s", tempoutput, str);
+    fitsadd(tab->headbuf, "HISTORY ", tempoutput);
 
   return RETURN_OK;
   }
