@@ -745,7 +745,7 @@ void	read_ibody(tabstruct *tab, FLAGTYPE *ptr, size_t size)
 
         // CFITSIO
          if (tab->isTileCompressed)
-         	readTileCompressed(tab, spoonful, bufdata0);
+         	readTileCompressed(tab, spoonful, (double *)bufdata0);
          else
         	QFREAD(bufdata, spoonful*tab->bytepix, cat->file, cat->filename);
 
